@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sizer/sizer.dart';
 
 import '../color/colors.dart';
 import 'custom_text.dart';
@@ -29,9 +30,11 @@ class _CustomListState extends State<CustomList> {
 
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
     bool color = false;
     return Container(
-      height: 160,
+      height: h / 6.5,
       child: ListView.builder(
           itemCount: widget.cat.length,
           scrollDirection: Axis.horizontal,
@@ -55,10 +58,10 @@ class _CustomListState extends State<CustomList> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: 100,
-                        height: 100,
+                        width: h / 12,
+                        height: h / 12,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(20),
                             color: selected == widget.cat[index]
                                 ? Colors.grey
                                 : white),
@@ -66,7 +69,7 @@ class _CustomListState extends State<CustomList> {
                           SingleChildScrollView(
                             child: CustomText(
                                 text: '',
-                                fontSize: 15,
+                                fontSize: 13.sp,
                                 color: white,
                                 fontWeight: FontWeight.normal),
                           )
@@ -75,7 +78,7 @@ class _CustomListState extends State<CustomList> {
                     ),
                     CustomText(
                         text: 'dddd',
-                        fontSize: 13,
+                        fontSize: 9.sp,
                         color: white,
                         fontWeight: FontWeight.normal)
                   ],

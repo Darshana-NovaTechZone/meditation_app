@@ -5,10 +5,12 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:medi_app/Screens/login/signup/signup.dart';
 import 'package:medi_app/color/colors.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
 import '../Main/home/home.dart';
+import '../Main/home/navigation.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -33,7 +35,7 @@ class _LoginState extends State<Login> {
               child: Image.asset(
                 'assets/Group 40.png',
                 fit: BoxFit.fill,
-                height: h / 3,
+                height: h / 3.5,
                 width: w,
               ),
             ),
@@ -46,7 +48,7 @@ class _LoginState extends State<Login> {
                     height: h / 10,
                   ),
                   SizedBox(
-                    height: 80,
+                    height: h / 12,
                     width: 80,
                     child: Image.asset(
                       'assets/l.png',
@@ -57,7 +59,7 @@ class _LoginState extends State<Login> {
                   ),
                   CustomText(
                       text: 'Sign In',
-                      fontSize: 30,
+                      fontSize: 17.sp,
                       color: mwhite,
                       fontWeight: FontWeight.bold),
                   SizedBox(
@@ -65,7 +67,7 @@ class _LoginState extends State<Login> {
                   ),
                   Text('Sign in now to access your exercises\nand saved music.',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 13.sp,
                           color: Colors.white60,
                           fontWeight: FontWeight.normal)),
                   SizedBox(
@@ -85,7 +87,7 @@ class _LoginState extends State<Login> {
                         ),
                         hintText: '  Email Address',
                         hintStyle: TextStyle(
-                            fontSize: 25,
+                            fontSize: 13.sp,
                             color: Colors.white60,
                             fontWeight: FontWeight.normal)),
                   ),
@@ -106,7 +108,7 @@ class _LoginState extends State<Login> {
                         ),
                         hintText: '  Password',
                         hintStyle: TextStyle(
-                            fontSize: 25,
+                            fontSize: 13.sp,
                             color: Colors.white60,
                             fontWeight: FontWeight.normal)),
                   ),
@@ -117,7 +119,7 @@ class _LoginState extends State<Login> {
                     alignment: Alignment.centerRight,
                     child: Text('Forgot Password?',
                         style: TextStyle(
-                            fontSize: 17,
+                            fontSize: 12.sp,
                             color: litewhie,
                             fontWeight: FontWeight.normal)),
                   ),
@@ -130,7 +132,8 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Home()),
+                            MaterialPageRoute(
+                                builder: (context) => NavigationScreen()),
                           );
                         },
                         child: CustomButton(
@@ -146,7 +149,7 @@ class _LoginState extends State<Login> {
                         children: [
                           CustomText(
                               text: "Don't have an account? ",
-                              fontSize: 25,
+                              fontSize: 13.sp,
                               color: mwhite,
                               fontWeight: FontWeight.normal),
                           TextButton(
@@ -161,7 +164,7 @@ class _LoginState extends State<Login> {
                               alignment: Alignment.center,
                               child: CustomText(
                                   text: "Sign Up",
-                                  fontSize: 25,
+                                  fontSize: 13.sp,
                                   color: mwhite,
                                   fontWeight: FontWeight.bold),
                             ),

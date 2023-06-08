@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:medi_app/Screens/login/loging.dart';
 import 'package:medi_app/color/colors.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_text.dart';
@@ -45,31 +46,31 @@ class _SignUpState extends State<SignUp> {
                     height: h / 10,
                   ),
                   SizedBox(
-                    height: 80,
+                    height: h / 12,
                     width: 80,
                     child: Image.asset(
                       'assets/l.png',
                     ),
                   ),
                   SizedBox(
-                    height: h / 60,
+                    height: h / 65,
                   ),
                   CustomText(
                       text: 'Sign Up',
-                      fontSize: 30,
+                      fontSize: 16.sp,
                       color: mwhite,
                       fontWeight: FontWeight.bold),
                   SizedBox(
-                    height: 20,
+                    height: h / 65,
                   ),
                   Text(
                       'Sign up now for free and start\nmeditating, and explore Medic.',
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 13.sp,
                           color: Colors.white60,
                           fontWeight: FontWeight.normal)),
                   SizedBox(
-                    height: h / 10,
+                    height: h / 20,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -85,7 +86,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                         hintText: '  Name',
                         hintStyle: TextStyle(
-                            fontSize: 25,
+                            fontSize: 13.sp,
                             color: Colors.white60,
                             fontWeight: FontWeight.normal)),
                   ),
@@ -106,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                         hintText: '  Email Address',
                         hintStyle: TextStyle(
-                            fontSize: 25,
+                            fontSize: 13.sp,
                             color: Colors.white60,
                             fontWeight: FontWeight.normal)),
                   ),
@@ -127,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                         hintText: '  Password',
                         hintStyle: TextStyle(
-                            fontSize: 25,
+                            fontSize: 13.sp,
                             color: Colors.white60,
                             fontWeight: FontWeight.normal)),
                   ),
@@ -138,7 +139,7 @@ class _SignUpState extends State<SignUp> {
                     alignment: Alignment.centerRight,
                     child: Text('Forgot Password?',
                         style: TextStyle(
-                            fontSize: 17,
+                            fontSize: 12.sp,
                             color: litewhie,
                             fontWeight: FontWeight.normal)),
                   ),
@@ -167,7 +168,7 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           CustomText(
                               text: "Already have an account? ",
-                              fontSize: 25,
+                              fontSize: 13.sp,
                               color: mwhite,
                               fontWeight: FontWeight.normal),
                           TextButton(
@@ -182,7 +183,7 @@ class _SignUpState extends State<SignUp> {
                               alignment: Alignment.center,
                               child: CustomText(
                                   text: "Sign In",
-                                  fontSize: 25,
+                                  fontSize: 13.sp,
                                   color: mwhite,
                                   fontWeight: FontWeight.bold),
                             ),

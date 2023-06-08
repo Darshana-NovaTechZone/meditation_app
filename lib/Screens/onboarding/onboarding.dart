@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:medi_app/Screens/login/loging.dart';
+import 'package:medi_app/Screens/login/signup/signup.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../color/colors.dart';
 import '../../widget/custom_button.dart';
@@ -54,7 +56,7 @@ class _OnboardingState extends State<Onboarding> {
                   child: Text(
                     'Skip',
                     style: TextStyle(
-                        color: white, fontFamily: 'Roboto', fontSize: 25),
+                        color: white, fontFamily: 'Roboto', fontSize: 13.sp),
                   ),
                 )),
           ),
@@ -72,7 +74,7 @@ class _OnboardingState extends State<Onboarding> {
               Container(
                 child: Image.asset(
                   'assets/l.png',
-                  height: h / 3.2,
+                  height: h / 3.5,
                 ),
               ),
               SizedBox(
@@ -80,7 +82,7 @@ class _OnboardingState extends State<Onboarding> {
               ),
               CustomText(
                   text: 'WELCOME',
-                  fontSize: 45,
+                  fontSize: 20.sp,
                   color: mwhite,
                   fontWeight: FontWeight.bold),
               SizedBox(
@@ -88,7 +90,7 @@ class _OnboardingState extends State<Onboarding> {
               ),
               CustomText(
                   text: 'Do meditation. Stay focused \nLive a healthy life.',
-                  fontSize: 25,
+                  fontSize: 13.sp,
                   color: mwhite,
                   fontWeight: FontWeight.normal),
               SizedBox(
@@ -121,16 +123,21 @@ class _OnboardingState extends State<Onboarding> {
                       children: [
                         CustomText(
                             text: "Don't have an account? ",
-                            fontSize: 25,
+                            fontSize: 13.sp,
                             color: mwhite,
                             fontWeight: FontWeight.normal),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignUp()),
+                            );
+                          },
                           child: Container(
                             alignment: Alignment.center,
                             child: CustomText(
                                 text: "Sign Up",
-                                fontSize: 25,
+                                fontSize: 13.sp,
                                 color: mwhite,
                                 fontWeight: FontWeight.bold),
                           ),

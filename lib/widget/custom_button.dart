@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import '../color/colors.dart';
 import 'custom_text.dart';
@@ -18,7 +19,10 @@ class CustomButton extends StatelessWidget {
       decoration:
           BoxDecoration(color: malloy, borderRadius: BorderRadius.circular(10)),
       child: CustomText(
-          text: text, fontSize: 25, color: mwhite, fontWeight: FontWeight.bold),
+          text: text,
+          fontSize: 15.sp,
+          color: mwhite,
+          fontWeight: FontWeight.bold),
     );
   }
 }
