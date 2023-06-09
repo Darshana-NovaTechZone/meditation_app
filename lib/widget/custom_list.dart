@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Screens/meditation/meditation.dart';
 import '../color/colors.dart';
 import 'custom_text.dart';
 
@@ -41,6 +42,10 @@ class _CustomListState extends State<CustomList> {
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Meditation()),
+                );
                 setState(() {
                   selected = widget.cat[index];
                 });

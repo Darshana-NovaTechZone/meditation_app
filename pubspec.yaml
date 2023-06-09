@@ -35,8 +35,15 @@ dependencies:
   responsive_framework:
   sizer: ^2.0.15
   http:
+  
+  just_audio: ^0.9.34
+  music_visualizer: ^1.0.4
+  fl_chart: ^0.62.0
+  audio_waveforms: ^1.0.4
+  audio_effect: ^1.0.2+6
   audioplayers: 
-  flutter_audio_waveforms: ^1.2.1+8
+  
+
   
 
 

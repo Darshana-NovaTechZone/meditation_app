@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:medi_app/Screens/sound/audio_player/audio_player.dart';
 
 import 'package:medi_app/color/colors.dart';
@@ -23,29 +23,36 @@ class _SoundState extends State<Sound> {
   String selected = 'All';
   List cat = ['a', 'b', 'c', "m", "v", "f"];
   final player = AudioPlayer();
+
   bool isPlaying = false;
   int x = 0;
   Duration duration = Duration.zero;
   Duration Position = Duration.zero;
   @override
   void initState() {
-    player.onPlayerStateChanged.listen((event) {
-      setState(() {
-        isPlaying = event == PlayerState.playing;
-      });
+    setState(() {
+      isPlaying = player.playerState.playing;
+     
+      log(player.playerState.playing.toString());
     });
-    player.onDurationChanged.listen((newDuration) {
-      setState(() {
-        isPlaying = true;
-        duration = newDuration;
-      });
-    });
-    player.onPositionChanged.listen((newPosition) {
-      log("jbhbhbhbhb");
-      setState(() {
-        Position = newPosition;
-      });
-    });
+
+    // player.onPlayerStateChanged.listen((event) {
+    //   setState(() {
+    //     isPlaying = event == PlayerState.playing;
+    //   });
+    // });
+    // player.onDurationChanged.listen((newDuration) {
+    //   setState(() {
+    //     isPlaying = true;
+    //     duration = newDuration;
+    //   });
+    // });
+    // player.onPositionChanged.listen((newPosition) {
+    //   log("jbhbhbhbhb");
+    //   setState(() {
+    //     Position = newPosition;
+    //   });
+    // });
 
     // TODO: implement initState
     super.initState();
@@ -112,13 +119,20 @@ class _SoundState extends State<Sound> {
                                     fontWeight: FontWeight.bold),
                                 IconButton(
                                     onPressed: () async {
-                                      if (isPlaying) {
+                                      setState(() {
+                                        isPlaying = !isPlaying;
+                                      });
+                                      if (isPlaying == false) {
                                         log('dddddddddd');
                                         await player.stop();
                                       } else {
-                                        await player.play(UrlSource(
-                                          'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
-                                        ));
+                                        final duration = await player.setUrl(
+                                            // Load a URL
+                                            'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3');
+                                        player.play();
+                                        // await player.play(UrlSource(
+                                        //   'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
+                                        // ));
                                       }
 
                                       // final duration = await _player.setUrl(

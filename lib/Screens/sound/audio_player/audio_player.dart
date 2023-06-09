@@ -4,7 +4,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_audio_waveforms/flutter_audio_waveforms.dart';
 
 import 'package:medi_app/color/colors.dart';
 import 'package:sizer/sizer.dart';
@@ -26,7 +25,7 @@ class _AudioPlayState extends State<AudioPlay> {
   void initState() {
     player.onPlayerStateChanged.listen((event) {
       setState(() {
-        isPlaying = event == PlayerState.playing;
+        isPlaying = event == PlayerState.PLAYING;
       });
     });
     player.onDurationChanged.listen((newDuration) {
@@ -35,13 +34,13 @@ class _AudioPlayState extends State<AudioPlay> {
         duration = newDuration;
       });
     });
-    player.onPositionChanged.listen((newPosition) {
+    player.onAudioPositionChanged.listen((newPosition) {
       log("jbhbhbhbhb");
       setState(() {
         Position = newPosition;
       });
     });
-    player.onPlayerComplete.listen((event) {
+    player.onPlayerCompletion.listen((event) {
       setState(() {
         Position = Duration(seconds: 0);
         isPlaying = false;
@@ -94,15 +93,6 @@ class _AudioPlayState extends State<AudioPlay> {
               fontSize: 20.sp,
               color: litewhie,
               fontWeight: FontWeight.normal),
-          PolygonWaveform(
-            inactiveColor: white,
-            activeColor: brown,
-            samples: [],
-            height: 100,
-            width: 300,
-            // maxDuration: duration,
-            // elapsedDuration: Position,
-          ),
           SizedBox(
             height: h / 20,
           ),
@@ -153,9 +143,9 @@ class _AudioPlayState extends State<AudioPlay> {
                           log('dddddddddd');
                           await player.stop();
                         } else {
-                          await player.play(UrlSource(
+                          await player.play(
                             'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
-                          ));
+                          );
                         }
                       },
                       child: Icon(
