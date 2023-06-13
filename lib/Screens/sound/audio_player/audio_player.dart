@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:medi_app/color/colors.dart';
+import 'package:music_visualizer/music_visualizer.dart';
+import 'package:simple_waveform_progressbar/simple_waveform_progressbar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../widget/custom_text.dart';
@@ -22,6 +24,7 @@ class _AudioPlayState extends State<AudioPlay> {
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration Position = Duration.zero;
+  bool loop = false;
   void initState() {
     player.onPlayerStateChanged.listen((event) {
       setState(() {
@@ -57,6 +60,23 @@ class _AudioPlayState extends State<AudioPlay> {
     });
   }
 
+  final List<Color> colors = [
+    Colors.red[900]!,
+    const Color.fromARGB(255, 149, 28, 183)!,
+    brown,
+    Colors.green[900]!,
+    Color.fromARGB(255, 242, 154, 232)!,
+    Colors.blue[900]!,
+    red,
+    Colors.brown[900]!
+  ];
+  @protected
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
+
+  final List<int> duration1 = [1000, 700, 600, 800, 500, 10, 100];
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -73,7 +93,7 @@ class _AudioPlayState extends State<AudioPlay> {
           Container(
             alignment: Alignment.center,
             child: CircleAvatar(
-              radius: h / 6,
+              radius: h / 7,
               backgroundImage: ExactAssetImage(
                 'assets/4261159.jpg',
               ),
@@ -90,11 +110,40 @@ class _AudioPlayState extends State<AudioPlay> {
           SizedBox(height: h / 60),
           CustomText(
               text: "By: Painting with passion",
-              fontSize: 20.sp,
+              fontSize: 17.sp,
               color: litewhie,
               fontWeight: FontWeight.normal),
           SizedBox(
-            height: h / 20,
+            height: h / 15,
+          ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: w / 13),
+          //   child: SizedBox(
+          //     width: double.infinity,
+          //     height: 50,
+          //     child: Center(
+          //       child: WaveformProgressbar(
+          //         color: Colors.grey,
+          //         progressColor: white,
+          //         progress: Position.inSeconds.toDouble() / 60,
+          //         onTap: (progress) {
+          //           setState(() {
+          //             var tt = progress;
+          //             changeToSecond(tt.toInt());
+          //           });
+          //         },
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          SizedBox(
+            height: 100,
+            child: MusicVisualizer(
+              curve: Curves.bounceIn,
+              barCount: 50,
+              colors: colors,
+              duration: duration1,
+            ),
           ),
           Slider(
             value: Position.inSeconds.toDouble(),
@@ -110,6 +159,9 @@ class _AudioPlayState extends State<AudioPlay> {
               });
             },
           ),
+          SizedBox(
+            height: h / 40,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -119,7 +171,9 @@ class _AudioPlayState extends State<AudioPlay> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        player.release();
+                      },
                       child: Icon(
                         Icons.restart_alt_outlined,
                         color: white,
@@ -129,7 +183,7 @@ class _AudioPlayState extends State<AudioPlay> {
                     alignment: Alignment.bottomCenter,
                     child: IconButton(
                         onPressed: () {
-                          player.setPlaybackRate(1.5);
+                          player.setPlaybackRate(0.5);
                         },
                         icon: Icon(
                           Icons.fast_rewind,
@@ -151,11 +205,11 @@ class _AudioPlayState extends State<AudioPlay> {
                       child: Icon(
                         isPlaying ? Icons.pause_circle : Icons.play_circle,
                         color: white,
-                        size: 70,
+                        size: h / 9,
                       )),
                   TextButton(
                       onPressed: () {
-                        player.setPlaybackRate(0.5);
+                        player.setPlaybackRate(1.5);
                       },
                       child: Icon(
                         Icons.fast_forward_rounded,
@@ -163,10 +217,22 @@ class _AudioPlayState extends State<AudioPlay> {
                         size: 30,
                       )),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          loop = !loop;
+                          print(loop.toString());
+                        });
+                        if (loop == true) {
+                          print(loop.toString());
+                          player.setReleaseMode(ReleaseMode.LOOP);
+                        } else {
+                          print(loop.toString());
+                          player.setReleaseMode(ReleaseMode.STOP);
+                        }
+                      },
                       child: Icon(
                         Icons.repeat_rounded,
-                        color: white,
+                        color: loop ? red : white,
                         size: 30,
                       )),
                 ],

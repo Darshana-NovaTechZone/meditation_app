@@ -40,7 +40,7 @@ class _ProfileState extends State<Profile> {
           Container(
             alignment: Alignment.center,
             child: CircleAvatar(
-              radius: h / 13,
+              radius: h / 14,
               backgroundImage: ExactAssetImage(
                 'assets/4261159.jpg',
               ),
@@ -51,7 +51,7 @@ class _ProfileState extends State<Profile> {
           ),
           CustomText(
               text: "Afreen Khan ",
-              fontSize: 20.sp,
+              fontSize: 17.sp,
               color: white,
               fontWeight: FontWeight.normal),
           CustomText(
@@ -61,7 +61,7 @@ class _ProfileState extends State<Profile> {
               fontWeight: FontWeight.normal),
           TabBar(
             indicatorColor: mlightblue,
-            indicatorWeight: 5,
+            indicatorWeight: 3.sp,
             unselectedLabelColor: Colors.white30,
             tabs: [
               Padding(
@@ -80,7 +80,7 @@ class _ProfileState extends State<Profile> {
             ],
           ),
           SizedBox(
-            height: h / 2,
+            height: h / 2.2,
             child: TabBarView(
               children: [
                 BarChartSample2(),

@@ -41,7 +41,10 @@ dependencies:
   fl_chart: ^0.62.0
   audio_waveforms: ^1.0.4
   audio_effect: ^1.0.2+6
-  audioplayers: 
+  audioplayers:
+  simple_waveform_progressbar: ^0.0.3 
+  timer_count_down: ^2.2.2
+  flutter_timer_countdown: ^1.0.5
   
 
   

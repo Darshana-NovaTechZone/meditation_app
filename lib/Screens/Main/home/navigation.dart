@@ -54,46 +54,41 @@ class _NavigationScreenState extends State<NavigationScreen> {
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: mblack,
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
-          child: Container(
-            height: h / 11,
-            child: BottomNavigationBar(
-              landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-              unselectedIconTheme: IconThemeData(size: 15.sp, color: malloy),
-              unselectedItemColor: Colors.deepOrangeAccent,
-              selectedIconTheme: IconThemeData(color: white, size: 19.sp),
-              selectedItemColor: white,
-              onTap: _onItemTapped,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              backgroundColor: mblack,
-              type: BottomNavigationBarType.fixed,
-              currentIndex: _selectedIndex,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'assets/l.png',
-                    fit: BoxFit.contain,
-                    height: _selectedIndex == 0 ? 19.sp : 15.sp,
-                    color: _selectedIndex == 0 ? white : malloy,
-                  ),
-                  label: '',
+      bottomNavigationBar: ClipRRect(
+        child: Container(
+          child: BottomNavigationBar(
+            landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+            unselectedIconTheme: IconThemeData(size: 15.sp, color: malloy),
+            unselectedItemColor: Colors.deepOrangeAccent,
+            selectedIconTheme: IconThemeData(color: white, size: 19.sp),
+            selectedItemColor: white,
+            onTap: _onItemTapped,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            backgroundColor: mblack,
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _selectedIndex,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/l.png',
+                  fit: BoxFit.contain,
+                  height: _selectedIndex == 0 ? 19.sp : 15.sp,
+                  color: _selectedIndex == 0 ? white : malloy,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.media_bluetooth_on),
-                  label: '',
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.media_bluetooth_on),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.person,
-                  ),
-                  label: '',
-                ),
-              ],
-            ),
+                label: '',
+              ),
+            ],
           ),
         ),
       ),
@@ -110,10 +105,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 SvgPicture.asset(
                   'assets/burger-menu-svgrepo-com.svg',
                   color: white,
-                  height: h / 13,
-                  width: 80,
+                  height: h / 12,
+                  width: w / 7,
+                  fit: BoxFit.fill,
                 ),
-                SizedBox(
+                Container(
+                  alignment: Alignment.center,
                   height: h / 13,
                   child: Image.asset(
                     'assets/l.png',
@@ -121,18 +118,21 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 ),
                 proImg
                     ? Container(
-                        width: 80,
+                        width: w / 7,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: CustomText(
-                              text: "edit",
-                              fontSize: 10.sp,
-                              color: white,
-                              fontWeight: FontWeight.bold),
+                          child: TextButton(
+                            onPressed: () {},
+                            child: CustomText(
+                                text: "edit",
+                                fontSize: 10.sp,
+                                color: white,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       )
                     : Container(
-                        width: 80,
+                        width: w / 7,
                         child: CircleAvatar(
                           radius: h / 40,
                           child: Image.asset(

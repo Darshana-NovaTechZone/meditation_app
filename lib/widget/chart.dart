@@ -55,12 +55,12 @@ class BarChartSample2State extends State<BarChartSample2> {
       child: Container(
         height: h / 3,
         child: Padding(
-          padding: const EdgeInsets.all(50),
+          padding: EdgeInsets.all(w / 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: h / 40,
+                height: h / 100,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,8 +76,8 @@ class BarChartSample2State extends State<BarChartSample2> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 38,
+              SizedBox(
+                height: h / 30,
               ),
               Container(
                 height: h / 4,

@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
   final player = AudioPlayer();
 
   bool isPlaying = false;
+  ScrollController scroll = ScrollController();
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -32,6 +33,7 @@ class _HomeState extends State<Home> {
       backgroundColor: mblack,
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: scroll,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child:
@@ -54,11 +56,13 @@ class _HomeState extends State<Home> {
               ),
               CustomList(cat: cat),
               Container(
-                height: 500,
                 child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
                     itemCount: cat.length,
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
+                        borderRadius: BorderRadius.circular(30),
                         onTap: () {},
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -136,10 +140,9 @@ class _HomeState extends State<Home> {
                                                           log('dddddddddd');
                                                           await player.stop();
                                                         } else {
-                                                          final duration =
-                                                              await player.setUrl(
-                                                                  // Load a URL
-                                                                  'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3');
+                                                          await player.setUrl(
+                                                              // Load a URL
+                                                              'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3');
                                                           player.play();
                                                         }
                                                       },
