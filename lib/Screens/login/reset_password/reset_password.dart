@@ -3,24 +3,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:medi_app/Screens/login/signup/signup.dart';
+import 'package:medi_app/Screens/login/loging.dart';
+import 'package:medi_app/Screens/login/reset_password_email_enter/reset_passwrd_email_enter.dart';
 import 'package:medi_app/color/colors.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../widget/custom_button.dart';
-import '../../widget/custom_text.dart';
-import '../Main/home/home.dart';
-import '../Main/home/navigation.dart';
-import 'reset_password/reset_password.dart';
+import '../../../widget/custom_button.dart';
+import '../../../widget/custom_text.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class ResetPassword extends StatefulWidget {
+  const ResetPassword({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<ResetPassword> createState() => _ResetPasswordState();
 }
 
-class _LoginState extends State<Login> {
+class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -34,66 +32,42 @@ class _LoginState extends State<Login> {
             Positioned(
               bottom: 0,
               child: Image.asset(
-                'assets/Group 40.png',
+                'assets/Group 27.png',
                 fit: BoxFit.fill,
-                height: h / 3.5,
+                height: h / 4,
                 width: w,
-              ),
-            ),
-            Positioned(
-              top: 20,
-              right: 20,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text('Skip',
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.white54,
-                      fontWeight: FontWeight.normal,
-                    )),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: w / 15),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: h / 5,
-                    child: Image.asset(
-                      'assets/l.png',
-                    ),
-                  ),
-                  SizedBox(
-                    height: h / 60,
+                    height: h / 20,
                   ),
                   Container(
                     alignment: Alignment.center,
                     child: CustomText(
-                        text: 'Sign In',
-                        fontSize: 17.sp,
+                        text: 'Reset Password',
+                        fontSize: 16.sp,
                         color: mwhite,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.normal),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: h / 20,
                   ),
                   Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        color: Colors.white38,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.normal,
+                    alignment: Alignment.center,
+                    child: CustomText(
                         text:
-                            'Sign in now to access your \nmeditations & daily exercises.',
-                      )),
+                            ' We just sent an email with the\nverification code.\nif you did not receive any email,\nkindly check your spam folder as\nwell.',
+                        fontSize: 13.sp,
+                        color: Colors.white38,
+                        fontWeight: FontWeight.normal),
+                  ),
                   SizedBox(
-                    height: h / 10,
+                    height: h / 20,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -107,7 +81,7 @@ class _LoginState extends State<Login> {
                             color: Colors.white60,
                           ),
                         ),
-                        hintText: '  Email Address',
+                        hintText: '  New password',
                         hintStyle: TextStyle(
                             fontSize: 13.sp,
                             color: Colors.white60,
@@ -128,28 +102,35 @@ class _LoginState extends State<Login> {
                             color: Colors.white60,
                           ),
                         ),
-                        hintText: '  Password',
+                        hintText: '  Confirm new password',
                         hintStyle: TextStyle(
                             fontSize: 13.sp,
                             color: Colors.white60,
                             fontWeight: FontWeight.normal)),
                   ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ResetPassword()),
-                        );
-                      },
-                      child: Text('Forgot Password?',
-                          style: TextStyle(
-                              fontSize: 12.sp,
-                              color: litewhie,
-                              fontWeight: FontWeight.normal)),
-                    ),
+                  SizedBox(
+                    height: h / 20,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white60,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white60,
+                          ),
+                        ),
+                        hintText: '  Verification code',
+                        hintStyle: TextStyle(
+                            fontSize: 13.sp,
+                            color: Colors.white60,
+                            fontWeight: FontWeight.normal)),
+                  ),
+                  SizedBox(
+                    height: h / 30,
                   ),
                   Column(
                     children: [
@@ -158,10 +139,10 @@ class _LoginState extends State<Login> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NavigationScreen()),
+                                builder: (context) => EmailEnter()),
                           );
                         },
-                        text: 'LOGIN',
+                        text: 'ResetPassword',
                         w: w,
                       ),
                       SizedBox(
@@ -171,27 +152,30 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomText(
-                              text: "Don't have an account? ",
+                              text: "Already have an account? ",
                               fontSize: 13.sp,
                               color: mwhite,
                               fontWeight: FontWeight.normal),
                           TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp()),
-                              );
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                  text: "Sign Up",
-                                  fontSize: 13.sp,
-                                  color: mwhite,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Login()),
+                                );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Sign In",
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      color: mwhite,
+                                      fontFamily: 'Merienda',
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              )),
                         ],
                       )
                     ],

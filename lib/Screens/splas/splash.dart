@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../onboarding/onboarding.dart';
+import '../onboarding/onboarding5.dart';
+import '../onboarding/onboarding1.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -15,11 +16,11 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     Future.delayed(
-      const Duration(seconds: 2),
+      Duration(seconds: 2),
       () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Onboarding()),
+          MaterialPageRoute(builder: (context) => Onboarding1()),
         );
       },
     );
@@ -29,19 +30,22 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(children: [
         Image.asset(
           'assets/background.jpg',
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+          height: h,
+          width: w,
           fit: BoxFit.fill,
         ),
         Container(
           alignment: Alignment.center,
           child: Image.asset(
             'assets/Logo.png',
-            fit: BoxFit.fill,
+            height: h / 1.8,
+            // fit: BoxFit.fill,
           ),
         ),
       ]),

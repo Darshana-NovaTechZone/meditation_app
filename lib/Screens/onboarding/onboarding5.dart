@@ -19,15 +19,6 @@ class Onboarding extends StatefulWidget {
 class _OnboardingState extends State<Onboarding> {
   @override
   void initState() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => IntroOne()),
-        //   );
-      },
-    );
     // TODO: implement initState
     super.initState();
   }
@@ -45,8 +36,8 @@ class _OnboardingState extends State<Onboarding> {
           fit: BoxFit.fill,
         ),
         Positioned(
-          right: 20,
-          top: 20,
+          right: 10,
+          top: 10,
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Container(
@@ -55,8 +46,7 @@ class _OnboardingState extends State<Onboarding> {
                   onPressed: () {},
                   child: Text(
                     'Skip',
-                    style: TextStyle(
-                        color: white, fontFamily: 'Roboto', fontSize: 13.sp),
+                    style: TextStyle(color: white, fontSize: 15.sp),
                   ),
                 )),
           ),
@@ -100,16 +90,17 @@ class _OnboardingState extends State<Onboarding> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Login()),
-                          );
-                        },
+                    TextButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CustomButton(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
+                          },
                           text: 'Login With Email',
                           w: w,
                         ),

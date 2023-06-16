@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:medi_app/Screens/login/loging.dart';
+import 'package:medi_app/Screens/login/reset_password/reset_password.dart';
 import 'package:medi_app/color/colors.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_text.dart';
+import 'verify_account/verify_account.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -43,32 +45,16 @@ class _SignUpState extends State<SignUp> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: h / 10,
+                    height: h / 5,
                   ),
-                  SizedBox(
-                    height: h / 12,
-                    width: 80,
-                    child: Image.asset(
-                      'assets/l.png',
-                    ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: CustomText(
+                        text: 'Your New Account',
+                        fontSize: 16.sp,
+                        color: mwhite,
+                        fontWeight: FontWeight.normal),
                   ),
-                  SizedBox(
-                    height: h / 65,
-                  ),
-                  CustomText(
-                      text: 'Sign Up',
-                      fontSize: 16.sp,
-                      color: mwhite,
-                      fontWeight: FontWeight.bold),
-                  SizedBox(
-                    height: h / 65,
-                  ),
-                  Text(
-                      'Sign up now for free and start\nmeditating, and explore Medic.',
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          color: Colors.white60,
-                          fontWeight: FontWeight.normal)),
                   SizedBox(
                     height: h / 20,
                   ),
@@ -133,32 +119,20 @@ class _SignUpState extends State<SignUp> {
                             fontWeight: FontWeight.normal)),
                   ),
                   SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Text('Forgot Password?',
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            color: litewhie,
-                            fontWeight: FontWeight.normal)),
-                  ),
-                  SizedBox(
                     height: h / 30,
                   ),
                   Column(
                     children: [
-                      TextButton(
-                        onPressed: () {
+                      CustomButton(
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
+                            MaterialPageRoute(
+                                builder: (context) => VerifyAccount()),
                           );
                         },
-                        child: CustomButton(
-                          text: 'SignUp',
-                          w: w,
-                        ),
+                        text: 'SignUp',
+                        w: w,
                       ),
                       SizedBox(
                         height: h / 40,
@@ -172,22 +146,25 @@ class _SignUpState extends State<SignUp> {
                               color: mwhite,
                               fontWeight: FontWeight.normal),
                           TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Login()),
-                              );
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                  text: "Sign In",
-                                  fontSize: 13.sp,
-                                  color: mwhite,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Login()),
+                                );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Sign In",
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      color: mwhite,
+                                      fontFamily: 'Merienda',
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              )),
                         ],
                       )
                     ],

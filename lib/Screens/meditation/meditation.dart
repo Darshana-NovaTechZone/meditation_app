@@ -162,25 +162,24 @@ class _MeditationState extends State<Meditation> {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: w / 4),
-                  child: TextButton(
-                      onPressed: () async {
-                        int? sec = await int.tryParse(_controller.text);
-                        print("ssssssss" + second.toString());
-                        setState(() {
-                          second = sec;
-                          log("ddddddddddd" + second.toString());
-                          edit = false;
-                          timerStart = !timerStart;
+                  child: CustomButton(
+                    onTap: ()  async{
+                         int? sec = await int.tryParse(_controller.text);
+                    print("ssssssss" + second.toString());
+                    setState(() {
+                      second = sec;
+                      log("ddddddddddd" + second.toString());
+                      edit = false;
+                      timerStart = !timerStart;
 
-                          if (timerStart) {
-                            timer.start();
-                          } else {
-                            timer.pause();
-                          }
-                        });
-                      },
-                      child: CustomButton(
-                          text: timerStart ? "Puse" : "Start Now", w: w)),
+                      if (timerStart) {
+                        timer.start();
+                      } else {
+                        timer.pause();
+                      }
+                    });
+                    },
+                      text: timerStart ? "Puse" : "Start Now", w: w),
                 ),
               ],
             ),

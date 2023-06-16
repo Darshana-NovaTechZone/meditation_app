@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CustomText extends StatelessWidget {
   const CustomText(
       {super.key,
@@ -20,7 +19,7 @@ class CustomText extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
               color: color,
-              fontFamily: "Roboto",
+              fontFamily: "Merienda",
               fontSize: fontSize,
               fontWeight: fontWeight)),
     );
