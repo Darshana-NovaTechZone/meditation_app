@@ -10,6 +10,8 @@ import 'package:medi_app/widget/custom_text.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../color/colors.dart';
+import '../../../widget/Custom_drawer.dart';
+import '../../lets_meditation/lets_meditation.dart';
 import '../../sound/sound.dart';
 
 class NavigationScreen extends StatefulWidget {
@@ -28,7 +30,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   static List<Widget> _pages = <Widget>[
     Home(),
+
+    LetsMeditate(),
+
     Sound(),
+    
     Profile(),
   ];
   void _onItemTapped(int index) {
@@ -48,112 +54,129 @@ class _NavigationScreenState extends State<NavigationScreen> {
     });
   }
 
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: mblack,
-      bottomNavigationBar: ClipRRect(
-        child: Container(
-          child: BottomNavigationBar(
-            landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-            unselectedIconTheme: IconThemeData(size: 15.sp, color: malloy),
-            unselectedItemColor: Colors.deepOrangeAccent,
-            selectedIconTheme: IconThemeData(color: white, size: 19.sp),
-            selectedItemColor: white,
-            onTap: _onItemTapped,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            backgroundColor: mblack,
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _selectedIndex,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/l.png',
-                  fit: BoxFit.contain,
-                  height: _selectedIndex == 0 ? 19.sp : 15.sp,
-                  color: _selectedIndex == 0 ? white : malloy,
-                ),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.media_bluetooth_on),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                ),
-                label: '',
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          SizedBox(
-            height: h / 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SvgPicture.asset(
-                  'assets/burger-menu-svgrepo-com.svg',
-                  color: white,
-                  height: h / 12,
-                  width: w / 7,
-                  fit: BoxFit.fill,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: h / 13,
-                  child: Image.asset(
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: customDrawer(),
+        backgroundColor: mblack,
+        bottomNavigationBar: ClipRRect(
+          child: Container(
+            child: BottomNavigationBar(
+              landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+              unselectedIconTheme: IconThemeData(size: 15.sp, color: malloy),
+              unselectedItemColor: Colors.deepOrangeAccent,
+              selectedIconTheme: IconThemeData(color: white, size: 19.sp),
+              selectedItemColor: white,
+              onTap: _onItemTapped,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              backgroundColor: mblack,
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _selectedIndex,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Image.asset(
                     'assets/l.png',
+                    fit: BoxFit.contain,
+                    height: _selectedIndex == 0 ? 19.sp : 15.sp,
+                    color: _selectedIndex == 0 ? white : malloy,
                   ),
+                  label: '',
                 ),
-                proImg
-                    ? Container(
-                        width: w / 7,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextButton(
-                            onPressed: () {},
-                            child: CustomText(
-                                text: "edit",
-                                fontSize: 10.sp,
-                                color: white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        width: w / 7,
-                        child: CircleAvatar(
-                          radius: h / 40,
-                          child: Image.asset(
-                            'assets/User-Profile.png',
-                            height: h / 15,
-                          ),
-                        ),
-                      )
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.baby_changing_station),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.media_bluetooth_on),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                  ),
+                  label: '',
+                ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Center(
-                child: _pages.elementAt(_selectedIndex), //New
+        ),
+        body: SingleChildScrollView(
+          child: Column(children: [
+            Column(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: h / 8,
+                      width: w,
+                      color: Colors.transparent,
+                    ),
+                    Container(
+                      height: h / 12,
+                      color: Color.fromARGB(255, 67, 65, 65),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: () =>
+                                  _scaffoldKey.currentState!.openDrawer(),
+                              child: Icon(
+                                Icons.circle_outlined,
+                                size: h / 17,
+                                color: litewhie,
+                              ),
+                            ),
+                            Container(
+                              width: w / 7,
+                              child: CircleAvatar(
+                                radius: h / 40,
+                                child: Image.asset(
+                                  'assets/User-Profile.png',
+                                  height: h / 15,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: CircleAvatar(
+                        radius: h / 17,
+                        backgroundColor: Color.fromARGB(174, 77, 76, 76),
+                        child: Image.asset(
+                          'assets/l.png',
+                          height: h / 11,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Center(
+                  child: _pages.elementAt(_selectedIndex), //New
+                ),
               ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }

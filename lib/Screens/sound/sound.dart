@@ -28,11 +28,12 @@ class _SoundState extends State<Sound> {
   int x = 0;
   Duration duration = Duration.zero;
   Duration Position = Duration.zero;
+  bool tap = false;
   @override
   void initState() {
     setState(() {
       isPlaying = player.playerState.playing;
-     
+
       log(player.playerState.playing.toString());
     });
 
@@ -70,163 +71,216 @@ class _SoundState extends State<Sound> {
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: mblack,
-        body: Column(
-          children: [
-            Stack(
-              children: [
-                Container(
-                  child: Stack(children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'assets/4261159.jpg',
-                        fit: BoxFit.fill,
-                        height: h / 3.5,
-                        width: w,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: h / 25, top: h / 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                              text: "Relax Sounds",
-                              fontSize: 17.sp,
-                              color: white,
-                              fontWeight: FontWeight.normal),
-                          SizedBox(height: h / 60),
-                          Text(
-                              "Sometimes the most productive\nthing you can do is relax.",
-                              style: TextStyle(
-                                  fontSize: 11.sp,
+        appBar: AppBar(
+          backgroundColor: mblack,
+          leading: IconButton(
+              onPressed: () {},
+              icon: CircleAvatar(
+                  backgroundColor: white.withOpacity(0.3),
+                  child: Icon(
+                    Icons.arrow_back_outlined,
+                    color: white,
+                  ))),
+          title: Container(
+            alignment: Alignment.centerRight,
+            child: CustomText(
+                text: "Calm your mind",
+                fontSize: 13.sp,
+                color: white,
+                fontWeight: FontWeight.normal),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Stack(
+                  children: [
+                    Container(
+                      child: Stack(children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.asset(
+                            'assets/4261159.jpg',
+                            fit: BoxFit.fill,
+                            height: h / 3.5,
+                            width: w,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: h / 25, top: h / 25),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                  text: "Relax Sounds",
+                                  fontSize: 17.sp,
                                   color: white,
-                                  fontWeight: FontWeight.normal)),
-                          SizedBox(height: h / 60),
-                          Container(
-                            height: h / 17,
-                            width: w / 3,
-                            decoration: BoxDecoration(
-                                color: white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomText(
-                                    text: "play now ",
-                                    fontSize: 10.sp,
-                                    color: black,
-                                    fontWeight: FontWeight.bold),
-                                IconButton(
-                                    onPressed: () async {
-                                      setState(() {
-                                        isPlaying = !isPlaying;
-                                      });
-                                      if (isPlaying == false) {
-                                        log('dddddddddd');
-                                        await player.stop();
-                                      } else {
-                                        final duration = await player.setUrl(
-                                            // Load a URL
-                                            'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3');
-                                        player.play();
-                                        // await player.play(UrlSource(
-                                        //   'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
-                                        // ));
-                                      }
-
-                                      // final duration = await _player.setUrl(
-                                      //     'http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3');
-                                    },
-                                    icon: Icon(isPlaying
-                                        ? Icons.pause_circle
-                                        : Icons.play_circle))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ]),
-                  height: h / 3.5,
-                  width: w,
-                  decoration: BoxDecoration(
-                      color: white, borderRadius: BorderRadius.circular(20)),
-                ),
-              ],
-            ),
-            Container(
-              height: 500,
-              child: ListView.builder(
-                  itemCount: cat.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => AudioPlay()),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  fontWeight: FontWeight.normal),
+                              SizedBox(height: h / 60),
+                              Text(
+                                  "Sometimes the most productive\nthing you can do is relax.",
+                                  style: TextStyle(
+                                      fontSize: 11.sp,
+                                      color: white,
+                                      fontWeight: FontWeight.normal)),
+                              SizedBox(height: h / 60),
+                              InkWell(
+                                onTapDown: (_) {
+                                  setState(() {
+                                    tap = true;
+                                  });
+                                },
+                                onTapUp: (_) {
+                                  setState(() {
+                                    tap = false;
+                                  });
+                                },
+                                onTapCancel: () {
+                                  setState(() {
+                                    tap = false;
+                                  });
+                                },
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AudioPlay(),
+                                      ));
+                                },
+                                child: AnimatedOpacity(
+                                  duration: Duration(microseconds: 50),
+                                  opacity: tap ? 0.2 : 1,
                                   child: Container(
-                                    width: h / 12,
-                                    height: h / 12,
+                                    height: h / 17,
+                                    width: w / 3,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: white),
-                                    child: Column(children: [
-                                      SingleChildScrollView(
-                                        child: CustomText(
-                                            text: '',
-                                            fontSize: 13.sp,
-                                            color: white,
-                                            fontWeight: FontWeight.normal),
-                                      )
-                                    ]),
+                                        color: white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CustomText(
+                                            text: "play now ",
+                                            fontSize: 10.sp,
+                                            color: black,
+                                            fontWeight: FontWeight.bold),
+                                        IconButton(
+                                            onPressed: () async {
+                                              setState(() {
+                                                isPlaying = !isPlaying;
+                                              });
+                                              if (isPlaying == false) {
+                                                log('dddddddddd');
+                                                await player.stop();
+                                              } else {
+                                                final duration =
+                                                    await player.setUrl(
+                                                        // Load a URL
+                                                        'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3');
+                                                player.play();
+                                                // await player.play(UrlSource(
+                                                //   'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
+                                                // ));
+                                              }
+
+                                              // final duration = await _player.setUrl(
+                                              //     'http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3');
+                                            },
+                                            icon: Icon(isPlaying
+                                                ? Icons.pause_circle
+                                                : Icons.play_circle))
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      CustomText(
-                                          text: 'dddd',
-                                          fontSize: 15.sp,
-                                          color: white,
-                                          fontWeight: FontWeight.normal),
-                                      CustomText(
-                                          text: 'dddd',
-                                          fontSize: 9.sp,
-                                          color: litewhie,
-                                          fontWeight: FontWeight.normal),
-                                    ],
+                              )
+                            ],
+                          ),
+                        )
+                      ]),
+                      height: h / 3.5,
+                      width: w,
+                      decoration: BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 500,
+                child: ListView.builder(
+                    itemCount: cat.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AudioPlay()),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      width: h / 12,
+                                      height: h / 12,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: white),
+                                      child: Column(children: [
+                                        SingleChildScrollView(
+                                          child: CustomText(
+                                              text: '',
+                                              fontSize: 13.sp,
+                                              color: white,
+                                              fontWeight: FontWeight.normal),
+                                        )
+                                      ]),
+                                    ),
                                   ),
-                                )
-                              ],
-                            ),
-                            CustomText(
-                                text: '20 min',
-                                fontSize: 11.sp,
-                                color: litewhie,
-                                fontWeight: FontWeight.normal),
-                          ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                            text: 'dddd',
+                                            fontSize: 15.sp,
+                                            color: white,
+                                            fontWeight: FontWeight.normal),
+                                        CustomText(
+                                            text: 'dddd',
+                                            fontSize: 9.sp,
+                                            color: litewhie,
+                                            fontWeight: FontWeight.normal),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }),
-            )
-          ],
+                      );
+                    }),
+              )
+            ],
+          ),
         ));
   }
 }

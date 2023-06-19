@@ -82,164 +82,187 @@ class _AudioPlayState extends State<AudioPlay> {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      backgroundColor: mblack,
-      body: Container(
-        height: h,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          SizedBox(
-            height: h / 5,
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: CircleAvatar(
-              radius: h / 7,
-              backgroundImage: ExactAssetImage(
-                'assets/4261159.jpg',
-              ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: mblack,
+        body: Container(
+          height: h,
+          child: Stack(children: [
+            Container(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: CircleAvatar(
+                      backgroundColor: white.withOpacity(0.3),
+                      child: Icon(
+                        Icons.arrow_back_outlined,
+                        color: white,
+                      ))),
             ),
-          ),
-          SizedBox(
-            height: h / 30,
-          ),
-          CustomText(
-              text: "Relax Sounds",
-              fontSize: 20.sp,
-              color: white,
-              fontWeight: FontWeight.normal),
-          SizedBox(height: h / 60),
-          CustomText(
-              text: "By: Painting with passion",
-              fontSize: 17.sp,
-              color: litewhie,
-              fontWeight: FontWeight.normal),
-          SizedBox(
-            height: h / 15,
-          ),
-          // Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: w / 13),
-          //   child: SizedBox(
-          //     width: double.infinity,
-          //     height: 50,
-          //     child: Center(
-          //       child: WaveformProgressbar(
-          //         color: Colors.grey,
-          //         progressColor: white,
-          //         progress: Position.inSeconds.toDouble() / 60,
-          //         onTap: (progress) {
-          //           setState(() {
-          //             var tt = progress;
-          //             changeToSecond(tt.toInt());
-          //           });
-          //         },
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          SizedBox(
-            height: 100,
-            child: MusicVisualizer(
-              curve: Curves.bounceIn,
-              barCount: 50,
-              colors: colors,
-              duration: duration1,
-            ),
-          ),
-          Slider(
-            value: Position.inSeconds.toDouble(),
-            max: duration.inSeconds.toDouble(),
-            activeColor: white,
-            inactiveColor: red,
-            min: 0.0,
-            onChanged: (value) {
-              log(value.toString());
-              setState(() {
-                changeToSecond(value.toInt());
-                value = value;
-              });
-            },
-          ),
-          SizedBox(
-            height: h / 40,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              alignment: Alignment.center,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Positioned(
+              bottom: 20,
+              left: 0,
+              right: 0,
+              child: Column(
                 children: [
-                  TextButton(
-                      onPressed: () {
-                        player.release();
-                      },
-                      child: Icon(
-                        Icons.restart_alt_outlined,
-                        color: white,
-                        size: 30,
-                      )),
                   Container(
-                    alignment: Alignment.bottomCenter,
-                    child: IconButton(
-                        onPressed: () {
-                          player.setPlaybackRate(0.5);
-                        },
-                        icon: Icon(
-                          Icons.fast_rewind,
-                          color: white,
-                          size: 30,
-                        )),
+                    alignment: Alignment.center,
+                    child: CircleAvatar(
+                      radius: h / 8,
+                      backgroundImage: ExactAssetImage(
+                        'assets/4261159.jpg',
+                      ),
+                    ),
                   ),
-                  TextButton(
-                      onPressed: () async {
-                        if (isPlaying) {
-                          log('dddddddddd');
-                          await player.stop();
-                        } else {
-                          await player.play(
-                            'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
-                          );
-                        }
-                      },
-                      child: Icon(
-                        isPlaying ? Icons.pause_circle : Icons.play_circle,
-                        color: white,
-                        size: h / 9,
-                      )),
-                  TextButton(
-                      onPressed: () {
-                        player.setPlaybackRate(1.5);
-                      },
-                      child: Icon(
-                        Icons.fast_forward_rounded,
-                        color: white,
-                        size: 30,
-                      )),
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          loop = !loop;
-                          print(loop.toString());
-                        });
-                        if (loop == true) {
-                          print(loop.toString());
-                          player.setReleaseMode(ReleaseMode.LOOP);
-                        } else {
-                          print(loop.toString());
-                          player.setReleaseMode(ReleaseMode.STOP);
-                        }
-                      },
-                      child: Icon(
-                        Icons.repeat_rounded,
-                        color: loop ? red : white,
-                        size: 30,
-                      )),
+                  SizedBox(
+                    height: h / 30,
+                  ),
+                  CustomText(
+                      text: "Relax Sounds",
+                      fontSize: 20.sp,
+                      color: white,
+                      fontWeight: FontWeight.normal),
+                  SizedBox(height: h / 60),
+                  CustomText(
+                      text: "By: Painting with passion",
+                      fontSize: 17.sp,
+                      color: litewhie,
+                      fontWeight: FontWeight.normal),
+                  SizedBox(
+                    height: h / 15,
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: w / 13),
+                  //   child: SizedBox(
+                  //     width: double.infinity,
+                  //     height: 50,
+                  //     child: Center(
+                  //       child: WaveformProgressbar(
+                  //         color: Colors.grey,
+                  //         progressColor: white,
+                  //         progress: Position.inSeconds.toDouble() / 60,
+                  //         onTap: (progress) {
+                  //           setState(() {
+                  //             var tt = progress;
+                  //             changeToSecond(tt.toInt());
+                  //           });
+                  //         },
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  SizedBox(
+                    height: 50,
+                    child: MusicVisualizer(
+                      curve: Curves.bounceIn,
+                      barCount: 50,
+                      colors: colors,
+                      duration: duration1,
+                    ),
+                  ),
+                  Slider(
+                    value: Position.inSeconds.toDouble(),
+                    max: duration.inSeconds.toDouble(),
+                    activeColor: white,
+                    inactiveColor: red,
+                    min: 0.0,
+                    onChanged: (value) {
+                      log(value.toString());
+                      setState(() {
+                        changeToSecond(value.toInt());
+                        value = value;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: h / 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                player.release();
+                              },
+                              child: Icon(
+                                Icons.restart_alt_outlined,
+                                color: white,
+                                size: 30,
+                              )),
+                          Container(
+                            alignment: Alignment.bottomCenter,
+                            child: IconButton(
+                                onPressed: () {
+                                  player.setPlaybackRate(0.5);
+                                },
+                                icon: Icon(
+                                  Icons.fast_rewind,
+                                  color: white,
+                                  size: 30,
+                                )),
+                          ),
+                          TextButton(
+                              onPressed: () async {
+                                if (isPlaying) {
+                                  log('dddddddddd');
+                                  await player.stop();
+                                } else {
+                                  await player.play(
+                                    'https://cld2099web.audiovideoweb.com/va90web25003/companions/Foundations%20of%20Rock/13.01.mp3',
+                                  );
+                                }
+                              },
+                              child: Icon(
+                                isPlaying
+                                    ? Icons.pause_circle
+                                    : Icons.play_circle,
+                                color: white,
+                                size: h / 9,
+                              )),
+                          TextButton(
+                              onPressed: () {
+                                player.setPlaybackRate(1.5);
+                              },
+                              child: Icon(
+                                Icons.fast_forward_rounded,
+                                color: white,
+                                size: 30,
+                              )),
+                          TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  loop = !loop;
+                                  print(loop.toString());
+                                });
+                                if (loop == true) {
+                                  print(loop.toString());
+                                  player.setReleaseMode(ReleaseMode.LOOP);
+                                } else {
+                                  print(loop.toString());
+                                  player.setReleaseMode(ReleaseMode.STOP);
+                                }
+                              },
+                              child: Icon(
+                                Icons.repeat_rounded,
+                                color: loop ? red : white,
+                                size: 30,
+                              )),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
-          )
-        ]),
+          ]),
+        ),
       ),
     );
   }
