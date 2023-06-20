@@ -74,7 +74,9 @@ class _SoundState extends State<Sound> {
         appBar: AppBar(
           backgroundColor: mblack,
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: CircleAvatar(
                   backgroundColor: white.withOpacity(0.3),
                   child: Icon(

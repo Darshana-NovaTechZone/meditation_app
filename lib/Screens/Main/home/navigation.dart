@@ -11,8 +11,10 @@ import 'package:sizer/sizer.dart';
 
 import '../../../color/colors.dart';
 import '../../../widget/Custom_drawer.dart';
+import '../../images/images.dart';
 import '../../lets_meditation/lets_meditation.dart';
 import '../../sound/sound.dart';
+import '../../tool/tool.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
@@ -30,11 +32,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   static List<Widget> _pages = <Widget>[
     Home(),
-
     LetsMeditate(),
-
-    Sound(),
-    
+    Images(),
+    Tool(),
     Profile(),
   ];
   void _onItemTapped(int index) {
@@ -80,12 +80,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               currentIndex: _selectedIndex,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'assets/l.png',
-                    fit: BoxFit.contain,
-                    height: _selectedIndex == 0 ? 19.sp : 15.sp,
-                    color: _selectedIndex == 0 ? white : malloy,
-                  ),
+                  icon: Icon(Icons.wallet),
                   label: '',
                 ),
                 BottomNavigationBarItem(
@@ -93,7 +88,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   label: '',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.media_bluetooth_on),
+                  icon: Icon(Icons.photo),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.photo_filter),
                   label: '',
                 ),
                 BottomNavigationBarItem(
