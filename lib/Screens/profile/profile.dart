@@ -33,62 +33,83 @@ class _ProfileState extends State<Profile> {
       length: 2,
       child: Scaffold(
         backgroundColor: mblack,
-        body: Column(children: [
-          SizedBox(
-            height: h / 40,
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: CircleAvatar(
-              radius: h / 14,
-              backgroundImage: ExactAssetImage(
-                'assets/4261159.jpg',
+        body: Stack(
+          children: [
+            Container(
+              height: h,
+              width: w,
+            ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: TextButton(
+                onPressed: () {},
+                child: CustomText(
+                    text: "edit",
+                    fontSize: 13.sp,
+                    color: white,
+                    fontWeight: FontWeight.normal),
               ),
             ),
-          ),
-          SizedBox(
-            height: h / 40,
-          ),
-          CustomText(
-              text: "Afreen Khan ",
-              fontSize: 17.sp,
-              color: white,
-              fontWeight: FontWeight.normal),
-          CustomText(
-              text: "colombo,Sri Lanka \n",
-              fontSize: 13.sp,
-              color: litewhie,
-              fontWeight: FontWeight.normal),
-          TabBar(
-            indicatorColor: mlightblue,
-            indicatorWeight: 3.sp,
-            unselectedLabelColor: Colors.white30,
-            tabs: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(
-                  'STATS',
-                  style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
+            Column(children: [
+              SizedBox(
+                height: h / 60,
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: CircleAvatar(
+                  radius: h / 14,
+                  backgroundImage: ExactAssetImage(
+                    'assets/4261159.jpg',
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text('ACHIEVEMENTS',
-                    style:
-                        TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold)),
+              SizedBox(
+                height: h / 40,
               ),
-            ],
-          ),
-          SizedBox(
-            height: h / 2.2,
-            child: TabBarView(
-              children: [
-                BarChartSample2(),
-                Icon(Icons.directions_transit, size: 350),
-              ],
-            ),
-          ),
-        ]),
+              CustomText(
+                  text: "Afreen Khan ",
+                  fontSize: 17.sp,
+                  color: white,
+                  fontWeight: FontWeight.normal),
+              CustomText(
+                  text: "colombo,Sri Lanka \n",
+                  fontSize: 13.sp,
+                  color: litewhie,
+                  fontWeight: FontWeight.normal),
+              TabBar(
+                indicatorColor: mlightblue,
+                indicatorWeight: 3.sp,
+                unselectedLabelColor: Colors.white30,
+                tabs: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Text(
+                      'STATS',
+                      style: TextStyle(
+                          fontSize: 9.sp, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Text('ACHIEVEMENTS',
+                        style: TextStyle(
+                            fontSize: 9.sp, fontWeight: FontWeight.bold)),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: h / 2.2,
+                child: TabBarView(
+                  children: [
+                    BarChartSample2(),
+                    Icon(Icons.directions_transit, size: 350),
+                  ],
+                ),
+              ),
+            ]),
+          ],
+        ),
       ),
     );
   }
