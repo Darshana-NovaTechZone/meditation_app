@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:medi_app/color/colors.dart';
-import 'package:medi_app/widget/custom_button.dart';
+
 import 'package:sizer/sizer.dart';
 
 import '../../../widget/custom_text.dart';

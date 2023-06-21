@@ -1,11 +1,19 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medi_app/Screens/login/loging.dart';
 import 'package:medi_app/Screens/login/signup/signup.dart';
+import 'package:medi_app/widget/login_button.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../color/colors.dart';
+import '../../helper/google_signin_helper.dart';
+import '../../providers/google_sign_provider.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
 import '../Main/home/navigation.dart';
@@ -59,7 +67,7 @@ class _OnboardingState extends State<Onboarding> {
           ),
         ),
         Positioned(
-          bottom: h / 10,
+          bottom: h / 18,
           left: 0,
           right: 0,
           child: Column(
@@ -97,20 +105,41 @@ class _OnboardingState extends State<Onboarding> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomButton(
-                          onTap: () {
-                            Navigator.push(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomLoginButton(
+                        icon: "assets/icons8-gmail-login-48.png",
+                        onTap: () {
+                          // signInWithGoogle(context: context);
+                        },
+                        text: 'Login With Email',
+                        w: w,
+                      ),
+                    ),
+                    SizedBox(
+                      height: h / 40,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomLoginButton(
+                        icon: "assets/icons8-google-48.png",
+                        onTap: () {
+                          signInWithGoogle(context: context);
+
+                          final provider = Provider.of<GoogleSignInProvider>(
                               context,
-                              MaterialPageRoute(builder: (context) => Login()),
-                            );
-                          },
-                          text: 'Login With Email',
-                          w: w,
-                        ),
+                              listen: false);
+                          provider.googleLogin().whenComplete(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const GmailLogin()));
+                            print(FirebaseAuth.instance.currentUser);
+                          });
+                          // signInWithGoogle(context: context);
+                        },
+                        text: 'Login With Gmail',
+                        w: w,
                       ),
                     ),
                     SizedBox(
@@ -144,11 +173,48 @@ class _OnboardingState extends State<Onboarding> {
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
       ]),
     );
   }
+}
+
+Future<User?> signInWithGoogle({required BuildContext context}) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+  if (googleSignInAccount != null) {
+    print(user);
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    try {
+      final UserCredential userCredential =
+          await auth.signInWithCredential(credential);
+      log(userCredential.toString());
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        // handle the error here
+      } else if (e.code == 'invalid-credential') {
+        // handle the error here
+      }
+    } catch (e) {
+      // handle the error here
+    }
+  }
+
+  return user;
 }

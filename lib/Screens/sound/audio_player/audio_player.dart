@@ -79,6 +79,7 @@ class _AudioPlayState extends State<AudioPlay> {
 
   final List<int> duration1 = [1000, 700, 600, 800, 500, 10, 100];
   bool tap = false;
+  
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;

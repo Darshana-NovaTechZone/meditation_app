@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "359765975992",
+    "project_id": "mediapp-2dc24",
+    "storage_bucket": "mediapp-2dc24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359765975992:android:49b5acfa52e96a2217254d",
+        "android_client_info": {
+          "package_name": "com.example.medi_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359765975992-34tctosdvgn3pds3fomudk7a10tsjrpf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medi_app",
+            "certificate_hash": "1f36b3d95c6d4c623d1be055050f52ce24c2e9e7"
+          }
+        },
+        {
+          "client_id": "359765975992-o4mfvk94beu3ptgija3fcc02afradba4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyPH5VKSL7ievafFYKZZQuhz1rGhWLvzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359765975992-gl67c47oveh7fgln5uht4gi4347957ga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

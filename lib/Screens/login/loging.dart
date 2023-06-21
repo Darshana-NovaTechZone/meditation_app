@@ -1,13 +1,20 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medi_app/Screens/login/signup/signup.dart';
 import 'package:medi_app/color/colors.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../helper/google_signin_helper.dart';
+import '../../providers/google_sign_provider.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
-import '../Main/home/home.dart';
+
 import '../Main/home/navigation.dart';
 import 'reset_password/reset_password.dart';
 
@@ -162,11 +169,23 @@ class _LoginState extends State<Login> {
                     children: [
                       CustomButton(
                         onTap: () {
+                          
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => NavigationScreen()),
+
+                          // );
+                          signInWithGoogle(context: context);
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NavigationScreen()),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const GmailLogin()));
                         },
                         text: 'LOGIN',
                         w: w,
@@ -211,4 +230,41 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+
+Future<User?> signInWithGoogle({required BuildContext context}) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+
+  if (googleSignInAccount != null) {
+    print(user);
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    try {
+      final UserCredential userCredential =
+          await auth.signInWithCredential(credential);
+      log(userCredential.toString());
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        // handle the error here
+      } else if (e.code == 'invalid-credential') {
+        // handle the error here
+      }
+    } catch (e) {
+      // handle the error here
+    }
+  }
+
+  return user;
 }
