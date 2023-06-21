@@ -106,7 +106,7 @@ class _NavigationScreenState extends State<NavigationScreen>
                                   onTap: () =>
                                       _scaffoldKey.currentState!.openDrawer(),
                                   child: Icon(
-                                    Icons.circle_outlined,
+                                    Icons.adjust,
                                     size: h / 17,
                                     color: litewhie,
                                   ),
@@ -153,8 +153,8 @@ class _NavigationScreenState extends State<NavigationScreen>
             labels: const ["home", "meditation", "image", "gallery", "profile"],
 
             icons: const [
-              Icons.dashboard,
               Icons.home,
+              Icons.psychology_rounded,
               Icons.photo,
               Icons.file_copy_outlined,
               Icons.person,
