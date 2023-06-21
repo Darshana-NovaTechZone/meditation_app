@@ -14,12 +14,12 @@ class _ImagesState extends State<Images> {
   bool tap = false;
   int selected = 0;
   List img = [
-    'assets/4261159.jpg',
-    'assets/4261159.jpg',
-    'assets/4261159.jpg',
-    'assets/4261159.jpg',
-    'assets/4261159.jpg',
-    'assets/4261159.jpg',
+    'assets/young-blonde-woman-sportswear-is-meditating-yoga-mat-with-closed-eyes.jpg',
+    'assets/sporty-young-woman-doing-yoga-practice-isolated-concept-healthy-life-natural-balance-body-mental-development.jpg',
+    'assets/side-view-woman-doing-yoga-outdoors.jpg',
+    'assets/portrait-young-beautiful-sportive-girl-white-background.jpg',
+    'assets/kike-vega-F2qh3yjz6Jk-unsplash.jpg',
+    'assets/kike-vega-F2qh3yjz6Jk-unsplash (1).jpg',
   ];
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class _ImagesState extends State<Images> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.asset(
-                        'assets/4261159.jpg',
+                        img[index],
                         fit: BoxFit.cover,
                       ),
                     ),

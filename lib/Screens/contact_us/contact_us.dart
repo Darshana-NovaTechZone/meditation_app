@@ -6,9 +6,15 @@ import 'package:sizer/sizer.dart';
 
 import '../../widget/custom_text.dart';
 
-class ContactUs extends StatelessWidget {
+class ContactUs extends StatefulWidget {
   const ContactUs({super.key});
 
+  @override
+  State<ContactUs> createState() => _ContactUsState();
+}
+
+class _ContactUsState extends State<ContactUs> {
+  bool tap = false;
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -18,18 +24,41 @@ class ContactUs extends StatelessWidget {
             backgroundColor: mblack,
             body: SingleChildScrollView(
               child: Column(children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: CircleAvatar(
-                          backgroundColor: white.withOpacity(0.3),
-                          child: Icon(
-                            Icons.arrow_back_outlined,
-                            color: white,
-                          ))),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    child: InkWell(
+                        borderRadius: BorderRadius.circular(100),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        onTapDown: (_) {
+                          setState(() {
+                            tap = true;
+                          });
+                        },
+                        onTapUp: (_) {
+                          setState(() {
+                            tap = false;
+                          });
+                        },
+                        onTapCancel: () {
+                          setState(() {
+                            tap = false;
+                          });
+                        },
+                        child: AnimatedOpacity(
+                          duration: Duration(milliseconds: 50),
+                          opacity: tap ? 0.3 : 1,
+                          child: CircleAvatar(
+                              backgroundColor: white.withOpacity(0.3),
+                              child: Icon(
+                                Icons.arrow_back_outlined,
+                                color: white,
+                              )),
+                        )),
+                  ),
                 ),
                 CustomText(
                   color: white,
@@ -87,8 +116,7 @@ class ContactUs extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                          height: h / 23,
-                          child: Image.asset('assets/web.png')),
+                          height: h / 23, child: Image.asset('assets/web.png')),
                       SizedBox(
                         width: 20,
                       ),
@@ -149,7 +177,6 @@ class ContactUs extends StatelessWidget {
                             height: h / 23,
                             child: Image.asset('assets/pinterest.png')),
                       ),
-                    
                     ],
                   ),
                 ),

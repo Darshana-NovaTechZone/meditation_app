@@ -8,6 +8,7 @@ import 'package:sizer/sizer.dart';
 import '../../color/colors.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
+import '../Main/home/navigation.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -43,7 +44,13 @@ class _OnboardingState extends State<Onboarding> {
             child: Container(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NavigationScreen()),
+                    );
+                  },
                   child: Text(
                     'Skip',
                     style: TextStyle(color: white, fontSize: 15.sp),

@@ -15,6 +15,7 @@ class MeditateDetail extends StatefulWidget {
 
 class _MeditateDetailState extends State<MeditateDetail> {
   bool tap = false;
+  bool tapButton = false;
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -24,18 +25,41 @@ class _MeditateDetailState extends State<MeditateDetail> {
         backgroundColor: mblack,
         body: SingleChildScrollView(
           child: Column(children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: CircleAvatar(
-                      backgroundColor: white.withOpacity(0.3),
-                      child: Icon(
-                        Icons.arrow_back_outlined,
-                        color: white,
-                      ))),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                    borderRadius: BorderRadius.circular(100),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    onTapDown: (_) {
+                      setState(() {
+                        tapButton = true;
+                      });
+                    },
+                    onTapUp: (_) {
+                      setState(() {
+                        tapButton = false;
+                      });
+                    },
+                    onTapCancel: () {
+                      setState(() {
+                        tapButton = false;
+                      });
+                    },
+                    child: AnimatedOpacity(
+                      duration: Duration(milliseconds: 50),
+                      opacity: tapButton ? 0.3 : 1,
+                      child: CircleAvatar(
+                          backgroundColor: white.withOpacity(0.3),
+                          child: Icon(
+                            Icons.arrow_back_outlined,
+                            color: white,
+                          )),
+                    )),
+              ),
             ),
             CustomText(
               color: white,

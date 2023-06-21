@@ -22,7 +22,6 @@ class _ToolState extends State<Tool> {
         SizedBox(
           height: h,
           child: GridView.builder(
-            
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemBuilder: (context, index) {
@@ -59,7 +58,7 @@ class _ToolState extends State<Tool> {
                           colorFilter: ColorFilter.mode(
                               Color((math.Random().nextDouble() * 0xFFFFFF)
                                       .toInt())
-                                  .withOpacity(1.0),
+                                  .withOpacity(0.2),
                               BlendMode.color)),
                       color: white,
                       borderRadius: BorderRadius.circular(15)),

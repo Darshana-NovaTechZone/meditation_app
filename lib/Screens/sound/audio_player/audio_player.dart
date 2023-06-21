@@ -11,6 +11,7 @@ import 'package:simple_waveform_progressbar/simple_waveform_progressbar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../widget/custom_text.dart';
+import '../../../widget/icon_button.dart';
 
 class AudioPlay extends StatefulWidget {
   const AudioPlay({super.key});
@@ -77,6 +78,7 @@ class _AudioPlayState extends State<AudioPlay> {
   }
 
   final List<int> duration1 = [1000, 700, 600, 800, 500, 10, 100];
+  bool tap = false;
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -88,18 +90,41 @@ class _AudioPlayState extends State<AudioPlay> {
         body: Container(
           height: h,
           child: Stack(children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: CircleAvatar(
-                      backgroundColor: white.withOpacity(0.3),
-                      child: Icon(
-                        Icons.arrow_back_outlined,
-                        color: white,
-                      ))),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                    borderRadius: BorderRadius.circular(100),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    onTapDown: (_) {
+                      setState(() {
+                        tap = true;
+                      });
+                    },
+                    onTapUp: (_) {
+                      setState(() {
+                        tap = false;
+                      });
+                    },
+                    onTapCancel: () {
+                      setState(() {
+                        tap = false;
+                      });
+                    },
+                    child: AnimatedOpacity(
+                      duration: Duration(milliseconds: 50),
+                      opacity: tap ? 0.3 : 1,
+                      child: CircleAvatar(
+                          backgroundColor: white.withOpacity(0.3),
+                          child: Icon(
+                            Icons.arrow_back_outlined,
+                            color: white,
+                          )),
+                    )),
+              ),
             ),
             Positioned(
               bottom: 20,

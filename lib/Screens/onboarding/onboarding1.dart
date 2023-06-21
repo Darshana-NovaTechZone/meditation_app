@@ -23,6 +23,7 @@ class _Onboarding1State extends State<Onboarding1> {
         floatingActionButton: FloatingActionButton.small(
           backgroundColor: malloy,
           child: Icon(Icons.arrow_forward),
+          
           onPressed: () {
             Navigator.push(
               context,

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -41,16 +39,25 @@ class _LoginState extends State<Login> {
               ),
             ),
             Positioned(
-              top: 20,
-              right: 20,
+              top: 10,
+              right: 10,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Text('Skip',
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      color: Colors.white54,
-                      fontWeight: FontWeight.normal,
-                    )),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NavigationScreen()),
+                    );
+                  },
+                  child: Text('Skip',
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        color: Colors.white54,
+                        fontWeight: FontWeight.normal,
+                      )),
+                ),
               ),
             ),
             Padding(

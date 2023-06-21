@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medi_app/color/colors.dart';
 
+import '../../widget/icon_button.dart';
+
 class ImageDetail extends StatelessWidget {
   const ImageDetail({super.key, required this.img});
   final String img;
@@ -16,48 +18,39 @@ class ImageDetail extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: CircleAvatar(
-                                backgroundColor: black.withOpacity(0.8),
-                                child: Icon(
-                                  Icons.arrow_back_outlined,
-                                  color: white,
-                                ))),
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: CircleAvatar(
-                                    backgroundColor: black.withOpacity(0.8),
-                                    child: Icon(
-                                      Icons.share_outlined,
-                                      color: white,
-                                      fill: 1,
-                                      opticalSize: 20,
-                                    ))),
-                            IconButton(
-                                onPressed: () {},
-                                icon: CircleAvatar(
-                                    backgroundColor: black.withOpacity(0.8),
-                                    child: Icon(
-                                      Icons.file_download_outlined,
-                                      color: white,
-                                    ))),
-                          ],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomIconButton(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          color: black,
+                          icon: Icons.arrow_back_outlined,
                         ),
-                      ),
-                    ]),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            children: [
+                              CustomIconButton(
+                                onTap: () {},
+                                color: black,
+                                icon: Icons.share_outlined,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              CustomIconButton(
+                                  onTap: () {},
+                                  color: black,
+                                  icon: Icons.file_download_outlined),
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
                 height: h,
                 width: w,
                 decoration: BoxDecoration(
