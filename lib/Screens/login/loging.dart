@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:medi_app/Screens/login/signup/signup.dart';
 import 'package:medi_app/color/colors.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ import '../../providers/google_sign_provider.dart';
 import '../../widget/custom_button.dart';
 import '../../widget/custom_text.dart';
 
+import '../../widget/login_button.dart';
 import '../Main/home/navigation.dart';
 import 'reset_password/reset_password.dart';
 
@@ -60,7 +62,7 @@ class _LoginState extends State<Login> {
                   },
                   child: Text('Skip',
                       style: TextStyle(
-                        fontSize: 15.sp,
+                        fontSize: 13.sp,
                         color: Colors.white54,
                         fontWeight: FontWeight.normal,
                       )),
@@ -95,7 +97,7 @@ class _LoginState extends State<Login> {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: h / 60,
                   ),
                   Container(
                       alignment: Alignment.center,
@@ -107,7 +109,7 @@ class _LoginState extends State<Login> {
                             'Sign in now to access your \nmeditations & daily exercises.',
                       )),
                   SizedBox(
-                    height: h / 10,
+                    height: h / 20,
                   ),
                   TextField(
                     decoration: InputDecoration(
@@ -169,29 +171,14 @@ class _LoginState extends State<Login> {
                     children: [
                       CustomButton(
                         onTap: () {
-                          
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => NavigationScreen()),
-
-                          // );
-                          signInWithGoogle(context: context);
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogin();
-
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const GmailLogin()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NavigationScreen()),
+                          );
                         },
                         text: 'LOGIN',
                         w: w,
-                      ),
-                      SizedBox(
-                        height: h / 40,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -219,7 +206,34 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      CustomLoginButton(
+                        icon: "assets/icons8-google-48.png",
+                        onTap: () {
+                          Center(
+                            child: LoadingAnimationWidget.discreteCircle(
+                              color: Colors.white,
+                              size: 200,
+                            ),
+                          );
+                          signInWithGoogle(context: context);
+
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin().whenComplete(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const GmailLogin()));
+                            print(FirebaseAuth.instance.currentUser);
+                          });
+
+                          // signInWithGoogle(context: context);
+                        },
+                        text: 'Sign In with Google',
+                        w: w,
+                      ),
                     ],
                   )
                 ],

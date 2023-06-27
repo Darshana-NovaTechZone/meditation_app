@@ -35,7 +35,7 @@ class EmailEnter extends StatelessWidget {
         ),
         CustomText(
             text:
-                "Don't worry,type your email address\nand get instruction to reset your\npassword!",
+                "Don't worry, type your email address\nand get instruction to reset your\npassword!",
             fontSize: 13.sp,
             color: Colors.white54,
             fontWeight: FontWeight.normal),

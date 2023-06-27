@@ -28,9 +28,10 @@ class _ImagesState extends State<Images> {
     return Scaffold(
       backgroundColor: mblack,
       body: Column(children: [
-        Expanded(
+        SizedBox(
+          height: h,
           child: ListView.builder(
-            padding: EdgeInsets.only(bottom: 200),
+            padding: EdgeInsets.only(top: h / 10),
             itemCount: img.length,
             itemBuilder: (context, index) {
               return InkWell(

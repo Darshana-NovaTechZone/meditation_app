@@ -53,7 +53,9 @@ class _CustomLoginButtonState extends State<CustomLoginButton> {
           height: h / 15,
           width: widget.w,
           decoration: BoxDecoration(
-              color: malloy, borderRadius: BorderRadius.circular(10)),
+              border: Border.all(color: malloy),
+              color: malloy.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(10)),
           child: SizedBox(
             width: w / 1,
             child: Row(

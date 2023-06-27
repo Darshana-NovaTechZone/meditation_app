@@ -72,12 +72,15 @@ class _ContactUsState extends State<ContactUs> {
                 SizedBox(
                     height: h / 2.6,
                     child: Lottie.asset('assets/76038-contact-mail.json')),
-                CustomText(
-                  color: white,
-                  text:
-                      "Contact our support officers.they are ready to assist you.",
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.normal,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
+                  child: CustomText(
+                    color: white,
+                    text:
+                        "Contact our support officers, they are ready to assist you.",
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
                 SizedBox(
                   height: h / 40,

@@ -49,7 +49,7 @@ class _Onboarding3State extends State<Onboarding3> {
                     height: h / 12,
                   ),
                   CustomText(
-                      text: 'Discover the power of meditation',
+                      text: 'Discover the power of\n meditation',
                       fontSize: 20.sp,
                       color: mwhite,
                       fontWeight: FontWeight.bold),

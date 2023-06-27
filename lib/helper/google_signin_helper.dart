@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../Screens/enter_name/enter_name.dart';
 import '../Screens/login/loging.dart';
 
 class GmailLogin extends StatefulWidget {
@@ -20,23 +22,34 @@ class _GmailLoginState extends State<GmailLogin> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           print('dddddddddddddddddddddddddddddddddddddd');
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: LoadingAnimationWidget.discreteCircle(
+              color: Colors.white,
+              size: 200,
+            ),
           );
         } else if (snapshot.hasData) {
-          print('dddddddddddddddddddddddddddddddqqqqqqqqqqqdddddddddddddd');
+          Center(
+            child: LoadingAnimationWidget.discreteCircle(
+              color: Colors.white,
+              size: 200,
+            ),
+          );
+
           print(FirebaseAuth.instance.currentUser!.phoneNumber);
           print(FirebaseAuth.instance.currentUser);
           print(snapshot.hasData);
-          return Login();
+          return EnterName();
         } else if (snapshot.hasError) {
-          print('ddddddddddddddddddddddddssssssssssssssssssssdddddddddddddd');
           return const Center(
             child: Text('Something went wrong'),
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: LoadingAnimationWidget.discreteCircle(
+              color: Colors.white,
+              size: 200,
+            ),
           );
         }
       },

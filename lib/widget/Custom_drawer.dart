@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:medi_app/Screens/about_us/about_us.dart';
 import 'package:medi_app/Screens/send_suggestion/send_suggestion.dart';
@@ -51,25 +49,31 @@ class _customDrawerState extends State<customDrawer> {
                       SizedBox(
                         height: h / 15,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.home_outlined,
-                              color: malloy,
-                            ),
-                            SizedBox(
-                              width: w / 15,
-                            ),
-                            CustomText(
-                              color: malloy,
-                              text: "Home",
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ],
+                      InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.home_outlined,
+                                color: malloy,
+                              ),
+                              SizedBox(
+                                width: w / 15,
+                              ),
+                              CustomText(
+                                color: malloy,
+                                text: "Home",
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       InkWell(

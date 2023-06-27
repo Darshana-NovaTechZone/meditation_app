@@ -78,19 +78,25 @@ class _AboutUsState extends State<AboutUs> {
             SizedBox(
                 child: Lottie.asset(
                     'assets/54102-sunrise-breathe-in-breathe-out.json')),
-            CustomText(
-              color: white,
-              text:
-                  "At Mediation, we believe in the transformative power of meditation. Our app is dedicated to helping you find inner peace, reduce stress,and cultivate mindfulness in your daily life. With a diverse library of guided meditations,soothing sounds, and mindfulness exercise,we provide the tools and support you need to embark on a journey of self-discovery and personal growth.Whether you're a beginner or an experienced practitioner,our app is here to inspire, guide, and empower you on your path to holistic well-being.Start your meditation journey with us today and experience the profound benefits of mindfulness in your life",
-              fontSize: 12.sp,
-              fontWeight: FontWeight.normal,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: CustomText(
+                color: white,
+                text:
+                    "At Mediation, we believe in the transformative power of meditation. Our app is dedicated to helping you find inner peace, reduce stress,and cultivate mindfulness in your daily life. With a diverse library of guided meditations,soothing sounds, and mindfulness exercise,we provide the tools and support you need to embark on a journey of self-discovery and personal growth.Whether you're a beginner or an experienced practitioner,our app is here to inspire, guide, and empower you on your path to holistic well-being.Start your meditation journey with us today and experience the profound benefits of mindfulness in your life",
+                fontSize: 11.sp,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            SizedBox(
+              height: 10,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: CustomText(
                 color: white,
                 text: "Let's discover your hidden power together!",
-                fontSize: 15.sp,
+                fontSize: 23.sp,
                 fontWeight: FontWeight.normal,
               ),
             ),

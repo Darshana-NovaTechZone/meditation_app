@@ -30,6 +30,17 @@ class _SoundState extends State<Sound> {
   Duration Position = Duration.zero;
   bool tap = false;
   bool tapButton = false;
+  ScrollController scroll = ScrollController();
+  final List<String> imgList = [
+    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  ];
+  String playImg =
+      'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80';
   @override
   void initState() {
     setState(() {
@@ -73,7 +84,7 @@ class _SoundState extends State<Sound> {
     return Scaffold(
         backgroundColor: mblack,
         appBar: AppBar(
-          backgroundColor: mblack,
+          backgroundColor: Color(0xff394546),
           leading: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -119,6 +130,7 @@ class _SoundState extends State<Sound> {
           ),
         ),
         body: SingleChildScrollView(
+          controller: scroll,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -130,8 +142,8 @@ class _SoundState extends State<Sound> {
                       child: Stack(children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/4261159.jpg',
+                          child: Image.network(
+                            playImg,
                             fit: BoxFit.fill,
                             height: h / 3.5,
                             width: w,
@@ -240,73 +252,76 @@ class _SoundState extends State<Sound> {
                   ],
                 ),
               ),
-              Container(
-                height: 500,
-                child: ListView.builder(
-                    itemCount: cat.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AudioPlay()),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      width: h / 12,
-                                      height: h / 12,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: white),
-                                      child: Column(children: [
-                                        SingleChildScrollView(
-                                          child: CustomText(
-                                              text: '',
-                                              fontSize: 13.sp,
+              ListView.builder(
+                  itemCount: imgList.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AudioPlay()),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        width: h / 12,
+                                        height: h / 12,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: white),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            child: Image.network(
+                                              imgList[index],
+                                              fit: BoxFit.fill,
+                                            )),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomText(
+                                              text: 'dddd',
+                                              fontSize: 15.sp,
                                               color: white,
                                               fontWeight: FontWeight.normal),
-                                        )
-                                      ]),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CustomText(
-                                            text: 'dddd',
-                                            fontSize: 15.sp,
-                                            color: white,
-                                            fontWeight: FontWeight.normal),
-                                        CustomText(
-                                            text: 'dddd',
-                                            fontSize: 9.sp,
-                                            color: litewhie,
-                                            fontWeight: FontWeight.normal),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
+                                          CustomText(
+                                              text: 'dddd',
+                                              fontSize: 9.sp,
+                                              color: litewhie,
+                                              fontWeight: FontWeight.normal),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: Color(0xffF7F3F0).withOpacity(0.5),
+                            )
+                          ],
                         ),
-                      );
-                    }),
-              )
+                      ),
+                    );
+                  })
             ],
           ),
         ));

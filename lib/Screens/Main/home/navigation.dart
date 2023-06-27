@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medi_app/Screens/Main/home/home.dart';
-import 'package:medi_app/Screens/profile/profile.dart';
+import 'package:medi_app/Screens/Main/home/profile/profile.dart';
 import 'package:medi_app/widget/custom_text.dart';
 import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
@@ -13,8 +13,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../../color/colors.dart';
 import '../../../widget/Custom_drawer.dart';
-import '../../images/images.dart';
-import '../../lets_meditation/lets_meditation.dart';
+import 'images/images.dart';
+import 'lets_meditation/lets_meditation.dart';
 import '../../sound/sound.dart';
 import '../../tool/tool.dart';
 
@@ -34,8 +34,8 @@ class _NavigationScreenState extends State<NavigationScreen>
   bool proImg = false;
 
   static List<Widget> _pages = <Widget>[
-    Home(),
     LetsMeditate(),
+    Home(),
     Images(),
     Tool(),
     Profile(),
@@ -82,21 +82,22 @@ class _NavigationScreenState extends State<NavigationScreen>
     var w = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: PreferredSize(
-              preferredSize: Size(w, h / 8),
+              preferredSize: Size(w, h / 10),
               child: Column(children: [
                 Column(
                   children: [
                     Stack(
                       children: [
                         Container(
-                          height: h / 9.5,
+                          height: h / 11,
                           width: w,
                           color: Colors.transparent,
                         ),
                         Container(
-                          height: h / 12,
-                          color: Color.fromARGB(255, 67, 65, 65),
+                          height: h / 15,
+                          color: Color(0xff394546),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Row(
@@ -107,18 +108,25 @@ class _NavigationScreenState extends State<NavigationScreen>
                                       _scaffoldKey.currentState!.openDrawer(),
                                   child: Icon(
                                     Icons.adjust,
-                                    size: h / 17,
+                                    size: h / 20,
                                     color: litewhie,
                                   ),
                                 ),
                                 Container(
                                   width: w / 7,
                                   child: CircleAvatar(
+                                    backgroundColor: Color(0xff394546),
                                     radius: h / 40,
-                                    child: Image.asset(
-                                      'assets/User-Profile.png',
-                                      height: h / 15,
-                                    ),
+                                    child: _selectedIndex == 0
+                                        ? Icon(
+                                            Icons.notifications_none_sharp,
+                                            size: h / 22,
+                                            color: litewhie,
+                                          )
+                                        : Image.asset(
+                                            'assets/User-Profile.png',
+                                            height: h / 15,
+                                          ),
                                   ),
                                 )
                               ],
@@ -129,13 +137,22 @@ class _NavigationScreenState extends State<NavigationScreen>
                           top: 0,
                           left: 0,
                           right: 0,
-                          child: CircleAvatar(
-                            radius: h / 19,
-                            backgroundColor: Color.fromARGB(174, 77, 76, 76),
-                            child: Image.asset(
-                              'assets/l.png',
+                          child: Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff394546),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
                               height: h / 11,
-                              fit: BoxFit.fill,
+                              width: h / 11,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.asset(
+                                  'assets/l.png',
+                                  height: h / 11,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -171,8 +188,8 @@ class _NavigationScreenState extends State<NavigationScreen>
             tabBarHeight: 55,
 
             textStyle: TextStyle(
-              fontSize: 12,
-              color: mblack,
+              fontSize: 5,
+              color: Color(0xff3A4647),
               fontWeight: FontWeight.w500,
             ),
 
@@ -186,217 +203,16 @@ class _NavigationScreenState extends State<NavigationScreen>
 
             tabIconSelectedColor: Colors.white,
 
-            tabBarColor: mblack,
+            tabBarColor: Color(0xff3A4647),
 
             onTabItemSelected: (int value) {
               setState(() {
                 _tabController!.index = value;
+                _selectedIndex = value;
+                print(value);
               });
             },
           ),
-
-          // bottomNavigationBar: ClipRRect(
-
-          //   child: Container(
-
-          //     child: BottomNavigationBar(
-
-          //       landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-
-          //       unselectedIconTheme: IconThemeData(size: 15.sp, color: malloy),
-
-          //       unselectedItemColor: Colors.deepOrangeAccent,
-
-          //       selectedIconTheme: IconThemeData(color: white, size: 19.sp),
-
-          //       selectedItemColor: white,
-
-          //       onTap: _onItemTapped,
-
-          //       showSelectedLabels: false,
-
-          //       showUnselectedLabels: false,
-
-          //       backgroundColor: mblack,
-
-          //       type: BottomNavigationBarType.shifting,
-
-          //       currentIndex: _selectedIndex,
-
-          //       items: <BottomNavigationBarItem>[
-
-          //         BottomNavigationBarItem(
-
-          //           icon: Icon(Icons.wallet),
-
-          //           label: '',
-
-          //         ),
-
-          //         BottomNavigationBarItem(
-
-          //           icon: Icon(Icons.baby_changing_station),
-
-          //           label: '',
-
-          //         ),
-
-          //         BottomNavigationBarItem(
-
-          //           icon: Icon(Icons.photo),
-
-          //           label: '',
-
-          //         ),
-
-          //         BottomNavigationBarItem(
-
-          //           icon: Icon(Icons.photo_filter),
-
-          //           label: '',
-
-          //         ),
-
-          //         BottomNavigationBarItem(
-
-          //           icon: Icon(
-
-          //             Icons.person,
-
-          //           ),
-
-          //           label: '',
-
-          //         ),
-
-          //       ],
-
-          //     ),
-
-          //   ),
-
-          // ),
-
-          // body: SingleChildScrollView(
-
-          //   child: Column(children: [
-
-          //     Column(
-
-          //       children: [
-
-          //         Stack(
-
-          //           children: [
-
-          //             Container(
-
-          //               height: h / 9.5,
-
-          //               width: w,
-
-          //               color: Colors.transparent,
-
-          //             ),
-
-          //             Container(
-
-          //               height: h / 12,
-
-          //               color: Color.fromARGB(255, 67, 65, 65),
-
-          //               child: Padding(
-
-          //                 padding: const EdgeInsets.symmetric(horizontal: 20),
-
-          //                 child: Row(
-
-          //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-          //                   children: [
-
-          //                     InkWell(
-
-          //                       onTap: () =>
-
-          //                           _scaffoldKey.currentState!.openDrawer(),
-
-          //                       child: Icon(
-
-          //                         Icons.circle_outlined,
-
-          //                         size: h / 17,
-
-          //                         color: litewhie,
-
-          //                       ),
-
-          //                     ),
-
-          //                     Container(
-
-          //                       width: w / 7,
-
-          //                       child: CircleAvatar(
-
-          //                         radius: h / 40,
-
-          //                         child: Image.asset(
-
-          //                           'assets/User-Profile.png',
-
-          //                           height: h / 15,
-
-          //                         ),
-
-          //                       ),
-
-          //                     )
-
-          //                   ],
-
-          //                 ),
-
-          //               ),
-
-          //             ),
-
-          //             Positioned(
-
-          //               top: 0,
-
-          //               left: 0,
-
-          //               right: 0,
-
-          //               child: CircleAvatar(
-
-          //                 radius: h / 19,
-
-          //                 backgroundColor: Color.fromARGB(174, 77, 76, 76),
-
-          //                 child: Image.asset(
-
-          //                   'assets/l.png',
-
-          //                   height: h / 11,
-
-          //                   fit: BoxFit.fill,
-
-          //                 ),
-
-          //               ),
-
-          //             ),
-
-          //           ],
-
-          //         ),
-
-          //       ],
-
-          //     ),
-
           body: SingleChildScrollView(
             child: SizedBox(
               height: h,
@@ -417,18 +233,5 @@ class _NavigationScreenState extends State<NavigationScreen>
             ),
           )),
     );
-    // Padding(
-    //   padding: const EdgeInsets.all(8.0),
-    //   child: SizedBox(
-    //     height: MediaQuery.of(context).size.height,
-    //     child: Center(
-    //       child: _pages.elementAt(_selectedIndex), //New
-    //     ),
-    //   ),
-    // ),
-    //       ]),
-    //     ),
-    //   ),
-    // );
   }
 }

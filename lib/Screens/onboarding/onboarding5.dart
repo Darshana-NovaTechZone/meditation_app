@@ -61,7 +61,7 @@ class _OnboardingState extends State<Onboarding> {
                   },
                   child: Text(
                     'Skip',
-                    style: TextStyle(color: white, fontSize: 15.sp),
+                    style: TextStyle(color: white, fontSize: 13.sp),
                   ),
                 )),
           ),
@@ -105,42 +105,41 @@ class _OnboardingState extends State<Onboarding> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomLoginButton(
-                        icon: "assets/icons8-gmail-login-48.png",
-                        onTap: () {
-                          // signInWithGoogle(context: context);
-                        },
-                        text: 'Login With Email',
-                        w: w,
-                      ),
+                    CustomLoginButton(
+                      icon: "assets/icons8-google-48.png",
+                      onTap: () {
+                        signInWithGoogle(context: context);
+
+                        final provider = Provider.of<GoogleSignInProvider>(
+                            context,
+                            listen: false);
+                        provider.googleLogin().whenComplete(() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const GmailLogin()));
+                          print(FirebaseAuth.instance.currentUser);
+                        });
+
+                        // signInWithGoogle(context: context);
+                      },
+                      text: 'Sign Up with Google',
+                      w: w,
                     ),
                     SizedBox(
                       height: h / 40,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomLoginButton(
-                        icon: "assets/icons8-google-48.png",
-                        onTap: () {
-                          signInWithGoogle(context: context);
-
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogin().whenComplete(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const GmailLogin()));
-                            print(FirebaseAuth.instance.currentUser);
-                          });
-                          // signInWithGoogle(context: context);
-                        },
-                        text: 'Login With Gmail',
-                        w: w,
-                      ),
+                    CustomLoginButton(
+                      icon: "assets/icons8-email-48.png",
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Login()));
+                        // signInWithGoogle(context: context);
+                      },
+                      text: 'Sign Up with Email',
+                      w: w,
                     ),
                     SizedBox(
                       height: h / 40,
@@ -148,11 +147,6 @@ class _OnboardingState extends State<Onboarding> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CustomText(
-                            text: "Don't have an account? ",
-                            fontSize: 13.sp,
-                            color: mwhite,
-                            fontWeight: FontWeight.normal),
                         TextButton(
                           onPressed: () {
                             Navigator.push(
@@ -160,14 +154,11 @@ class _OnboardingState extends State<Onboarding> {
                               MaterialPageRoute(builder: (context) => SignUp()),
                             );
                           },
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: CustomText(
-                                text: "Sign Up",
-                                fontSize: 13.sp,
-                                color: mwhite,
-                                fontWeight: FontWeight.bold),
-                          ),
+                          child: CustomText(
+                              text: "Already have an account? ",
+                              fontSize: 13.sp,
+                              color: mwhite,
+                              fontWeight: FontWeight.normal),
                         ),
                       ],
                     )

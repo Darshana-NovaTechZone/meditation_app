@@ -4,7 +4,7 @@ import 'package:medi_app/color/colors.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../widget/custom_text.dart';
+import '../../../../../widget/custom_text.dart';
 
 class MeditateDetail extends StatefulWidget {
   const MeditateDetail({super.key});
@@ -26,7 +26,7 @@ class _MeditateDetailState extends State<MeditateDetail> {
         body: SingleChildScrollView(
           child: Column(children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(15.0),
               child: Container(
                 alignment: Alignment.topLeft,
                 child: InkWell(
@@ -77,9 +77,9 @@ class _MeditateDetailState extends State<MeditateDetail> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    // assign the color to the border color
-                    color: malloy,
-                  ),
+                      // assign the color to the border color
+                      color: Color(0xffF7F3F0),
+                      width: 0.3),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(
